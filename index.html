@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Timer with Image Slider and Music Playlist</title>
+    <style>
+        /* Basic styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Countdown display styling */
+        .timer {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Image slider styling */
+        .slider {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        /* CSS animation for the slides */
+        .slide:nth-child(1) {
+            animation: slide-animation 25s infinite;
+        }
+        .slide:nth-child(2) {
+            animation: slide-animation 25s infinite 5s;
+        }
+        .slide:nth-child(3) {
+            animation: slide-animation 25s infinite 10s;
+        }
+        .slide:nth-child(4) {
+            animation: slide-animation 25s infinite 15s;
+        }
+        .slide:nth-child(5) {
+            animation: slide-animation 25s infinite 20s;
+        }
+
+        /* Keyframes for opacity transition */
+        @keyframes slide-animation {
+            0%, 20% {
+                opacity: 1;
+            }
+            25%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* Music player styling */
+        .music-player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .controls button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Countdown Timer -->
+    <div class="timer" id="timer">Elapsed Time: </div>
+
+    <!-- Image Slider -->
+    <div class="slider">
+        <img src="path/to/image1.jpg" alt="Image 1" class="slide">
+        <img src="path/to/image2.jpg" alt="Image 2" class="slide">
+        <img src="path/to/image3.jpg" alt="Image 3" class="slide">
+        <img src="path/to/image4.jpg" alt="Image 4" class="slide">
+        <img src="path/to/image5.jpg" alt="Image 5" class="slide">
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <h2>Music Playlist</h2>
+        <audio id="audioPlayer" controls>
+            <source src="path/to/song1.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="controls">
+            <button onclick="prevSong()">Previous</button>
+            <button onclick="nextSong()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer Logic
+        const startTime = new Date('2024-10-13T04:30:00'); // Starting date and time
+        const timerElement = document.getElementById('timer');
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startTime;
+
+            const seconds = Math.floor(diff / 1000) % 60;
+            const minutes = Math.floor(diff / (1000 * 60)) % 60;
+            const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            timerElement.textContent = `Elapsed Time: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateTimer, 1000); // Update the timer every second
+
+        // Music Playlist Logic
+        const songs = [
+            "path/to/song1.mp3",
+            "path/to/song2.mp3",
+            "path/to/song3.mp3",
+            "path/to/song4.mp3",
+            "path/to/song5.mp3"
+        ];
+        let currentSongIndex = 0;
+        const audioPlayer = document.getElementById("audioPlayer");
+
+        function loadSong(songIndex) {
+            audioPlayer.src = songs[songIndex];
+            audioPlayer.play();
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(currentSongIndex);
+        }
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(currentSongIndex);
+        }
+
+        // Load the first song when the page loads
+        loadSong(currentSongIndex);
+    </script>
+
+</body>
+</html>
