@@ -50,13 +50,50 @@
             font-size: 18px;
         }
 
-        /* Image styling */
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 20px;
+        /* Slider styling */
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            margin: 20px 0;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        /* Slider navigation */
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .slider-controls button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .slider-controls button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         /* Footer styling */
@@ -65,18 +102,6 @@
             font-size: 14px;
             color: #777;
         }
-
-        /* Music player styling */
-        .music-player {
-            margin-top: 20px;
-        }
-
-        .music-controls button {
-            margin: 5px;
-            padding: 7px 17px;
-            font-size: 13px;
-        }
-        
     </style>
 </head>
 <body>
@@ -87,25 +112,18 @@
             <p id="elapsed-time"></p>
         </div>
 
-        <!-- Image Display Section -->
-        <div class="image-container">
-            <h2>Te AMO, meu grudinho</h2>
-            <img src="https://iili.io/2z2CTgV.png" alt="C:\Users\Eduardo\Desktop\teste.site\coracao.png">
-           <!-- <img src="https://iili.io/2xOVxqv.png" alt="C:\Users\Eduardo\Desktop\teste.site\coracao.png"> -->
-             
-            
-        </div>
-
-        <!-- Music Player Section -->
-        <div class="music-player">
-            <h2>Aperte o Play</h2>
-            <audio id="audio-player" src="Amor_I_Love_You_Marisa Monte.mp3" controls></audio>
-            <div class="music-controls">
-                <button onclick="playMusic()">Play</button>
-                <button onclick="pauseMusic()">Pause</button>
-                <button onclick="nextSong()">Next</button>
-                <button onclick="previousSong()">Previous</button>
+        <!-- Slider Section -->
+        <div class="slider">
+            <div class="slides" id="slides">
+                <img src="https://via.placeholder.com/400x250?text=Foto+1" alt="Foto 1">
+                <img src="https://via.placeholder.com/400x250?text=Foto+2" alt="Foto 2">
+                <img src="https://via.placeholder.com/400x250?text=Foto+3" alt="Foto 3">
             </div>
+            <div class="slider-controls">
+                <button id="prev">‹</button>
+                <button id="next">›</button>
+            </div>
+        </div>
 
         <footer>
             <p>Obrigado por tornar a vida mais alegre, o dia mais colorido, o amor mais amor!</p>
@@ -113,20 +131,18 @@
     </div>
 
     <script>
-        // Define the start date and time
+        // Counter functionality
         const startDate = new Date("2024-10-13T04:30:00");
 
         function updateCounter() {
             const currentDate = new Date();
-            const elapsedTime = currentDate - startDate; // Difference in milliseconds
+            const elapsedTime = currentDate - startDate;
 
-            // Calculate days, hours, minutes, and seconds
             const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
             const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
 
-            // Display the result in the HTML
             document.getElementById("elapsed-time").innerHTML = 
                 `Desde o nosso primeiro beijo em 13 de Outubro de 2024, as 4:30hrs, estamos juntos há:<br><br>` +
                 `Dias: ${days}<br>` +
@@ -135,8 +151,31 @@
                 `Segundos: ${seconds}`;
         }
 
-        // Update the counter every second
         setInterval(updateCounter, 1000);
+
+        // Slider functionality
+        const slides = document.getElementById("slides");
+        const images = slides.querySelectorAll("img");
+        const totalSlides = images.length;
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            if (index < 0) {
+                currentSlide = totalSlides - 1;
+            } else if (index >= totalSlides) {
+                currentSlide = 0;
+            } else {
+                currentSlide = index;
+            }
+            const offset = -currentSlide * 100; // Shift by 100% per slide
+            slides.style.transform = `translateX(${offset}%)`;
+        }
+
+        document.getElementById("prev").addEventListener("click", () => showSlide(currentSlide - 1));
+        document.getElementById("next").addEventListener("click", () => showSlide(currentSlide + 1));
+
+        // Auto-slide every 5 seconds
+        setInterval(() => showSlide(currentSlide + 1), 5000);
     </script>
 </body>
 </html>
