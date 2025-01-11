@@ -150,6 +150,7 @@
 <body>
     <div class="container">
         <h1>O dia em que descobri o que era amor</h1>
+        <h2>Te AMO, meu grudinho</h2>
 
         <div class="counter">
             <p id="elapsed-time"></p>
@@ -214,11 +215,8 @@
             const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
 
             document.getElementById("elapsed-time").innerHTML = 
-                `Desde o nosso primeiro beijo em 13 de Outubro de 2024, estamos juntos há:<br><br>` +
-                `Dias: ${days}<br>` +
-                `Horas: ${hours}<br>` +
-                `Minutos: ${minutes}<br>` +
-                `Segundos: ${seconds}`;
+                `Nosso primeiro beijo foi em 13 de Outubro de 2024, e estamos juntos há:<br><br>` +
+                `Dias: ${days}<br>` + `Horas: ${hours}<br>` + `Minutos: ${minutes}<br>` + `Segundos: ${seconds}`;
         }
 
         setInterval(updateCounter, 1000);
