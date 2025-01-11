@@ -52,8 +52,8 @@
         .slider {
             position: relative;
             width: 100%;
-            max-width: 100%;
             height: auto;
+            max-height: 400px; /* Limite máximo em dispositivos maiores */
             overflow: hidden;
             margin: 20px 0;
             border-radius: 8px;
@@ -106,6 +106,10 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
+            .slider {
+                max-height: 300px; /* Altura máxima para tablets */
+            }
+
             h1 {
                 font-size: 1.5rem;
             }
@@ -114,22 +118,18 @@
                 padding: 15px;
             }
 
-            .slider {
-                max-height: 200px;
-            }
-
             footer {
                 font-size: 0.8rem;
             }
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.3rem;
+            .slider {
+                max-height: 200px; /* Altura máxima para dispositivos pequenos */
             }
 
-            .slider {
-                max-height: 150px;
+            h1 {
+                font-size: 1.3rem;
             }
 
             footer {
@@ -146,7 +146,7 @@
             <p id="elapsed-time"></p>
         </div>
 
-        <!-- Music Player Section -->
+<!-- Music Player Section -->
         <div class="music-player">
             <h2>Aperte o Play</h2>
             <audio id="audio-player" src="Amor_I_Love_You_Marisa Monte.mp3" controls></audio>
@@ -156,7 +156,7 @@
                 <button onclick="nextSong()">Next</button>
                 <button onclick="previousSong()">Previous</button>
             </div>
-
+        
         <!-- Slider Section -->
         <div class="slider">
             <div class="slides" id="slides">
