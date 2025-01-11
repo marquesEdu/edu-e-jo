@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador de tempo</title>
+    <title>Contador de Tempo</title>
     <style>
         /* Basic reset */
         * {
@@ -39,13 +39,13 @@
         h1 {
             color: #4CAF50;
             margin-bottom: 20px;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         /* Counter styling */
         .counter p {
             margin: 10px 0;
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
 
         /* Slider styling */
@@ -53,7 +53,6 @@
             position: relative;
             width: 100%;
             height: auto;
-            max-height: 400px; /* Limite máximo em dispositivos maiores */
             overflow: hidden;
             margin: 20px 0;
             border-radius: 8px;
@@ -105,17 +104,13 @@
         }
 
         /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .slider {
-                max-height: 300px; /* Altura máxima para tablets */
-            }
-
+        @media (max-width: 1024px) {
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
-            .container {
-                padding: 15px;
+            .counter p {
+                font-size: 1rem;
             }
 
             footer {
@@ -123,17 +118,31 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .slider {
-                max-height: 200px; /* Altura máxima para dispositivos pequenos */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
             }
 
             h1 {
-                font-size: 1.3rem;
+                font-size: 1.6rem;
             }
 
             footer {
                 font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .counter p {
+                font-size: 0.9rem;
+            }
+
+            footer {
+                font-size: 0.6rem;
             }
         }
     </style>
@@ -146,7 +155,7 @@
             <p id="elapsed-time"></p>
         </div>
 
-<!-- Music Player Section -->
+        <!-- Music Player Section -->
         <div class="music-player">
             <h2>Aperte o Play</h2>
             <audio id="audio-player" src="Amor_I_Love_You_Marisa Monte.mp3" controls></audio>
@@ -156,7 +165,7 @@
                 <button onclick="nextSong()">Next</button>
                 <button onclick="previousSong()">Previous</button>
             </div>
-        
+            
         <!-- Slider Section -->
         <div class="slider">
             <div class="slides" id="slides">
